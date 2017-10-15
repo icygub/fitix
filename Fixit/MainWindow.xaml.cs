@@ -43,7 +43,7 @@ namespace Fixit {
 
         private void FilesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string myPicture = "pack://application:,,,/File Renamer;component/Image/NoImage.jpg";
+            string myPicture = "pack://application:,,,/Fixit;component/Image/NoImage.jpg";
             if (FilesListBox.Items.Count != 0)
             {
                 myPicture = (txtPath.Text + "\\" + FilesListBox.SelectedItem.ToString());
@@ -90,12 +90,12 @@ namespace Fixit {
             }
             catch
             {
-                /*BitmapImage bitmap = new BitmapImage();
+                BitmapImage bitmap = new BitmapImage();
                 bitmap.BeginInit();
-                bitmap.UriSource = new Uri("pack://application:,,,/File Renamer;component/Image/InvalidFile.jpg");
+                bitmap.UriSource = new Uri("pack://application:,,,/Fixit;component/Image/InvalidFile.jpg");
                 bitmap.EndInit();
                 PreviewImage.Stretch = Stretch.Fill;
-                PreviewImage.Source = bitmap;*/
+                PreviewImage.Source = bitmap;
             }
 
         }
