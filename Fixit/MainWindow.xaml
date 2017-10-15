@@ -7,6 +7,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Grid>
+            <Button x:Name="btnOpen" Content="Open" HorizontalAlignment="Left" Margin="319,12,0,0" VerticalAlignment="Top" Width="75" Click="btnOpen_Click"/>
+            <Label Content="Path" HorizontalAlignment="Left" Margin="7,6,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.382,0.406"/>
+            <TextBox x:Name="txtPath" HorizontalAlignment="Left" Height="23" Margin="45,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="269" IsReadOnly="True"/>
+            <ListBox x:Name="FilesListBox" HorizontalAlignment="Left" Height="220" Margin="10,76,0,0" VerticalAlignment="Top" Width="209" SelectionChanged="FilesListBox_SelectionChanged"/>
+            <Label Content="Listbox" HorizontalAlignment="Left" Margin="32,45,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.382,0.406" Width="112"/>
+            <Image x:Name="PreviewImage" HorizontalAlignment="Left" Height="220" Margin="252,76,0,0" VerticalAlignment="Top" Width="255"/>
+            <Button x:Name="DefaultPath" Content="Default Path" HorizontalAlignment="Left" Margin="319,37,0,0" VerticalAlignment="Top" Width="75" Click="DefaultPath_Click"/>
+
+        </Grid>
+
     </Grid>
 </Window>
