@@ -11,12 +11,14 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MessageBox = System.Windows.MessageBox;
 using Path = System.IO.Path;
 
 namespace Fixit {
@@ -34,21 +36,11 @@ namespace Fixit {
         {
             FolderBrowserDialog fbd = new FolderBrowserDialog();
             fbd.ShowNewFolderButton = false;
-            fbd.Description = "Select Path";
+            fbd.Description = "Select Path:";
             if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 LoadFiles(fbd.SelectedPath);
             }
-        }
-
-        private void FilesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string myPicture = "pack://application:,,,/Fixit;component/Image/NoImage.jpg";
-            if (FilesListBox.Items.Count != 0)
-            {
-                myPicture = (txtPath.Text + "\\" + FilesListBox.SelectedItem.ToString());
-            }
-            LoadImage(myPicture);
         }
 
         private void LoadFiles(string path)
@@ -61,45 +53,37 @@ namespace Fixit {
              * https://stackoverflow.com/questions/163162/can-you-call-directory-getfiles-with-multiple-filters
              * 
              */
-            FilesListBox.Items.Clear();
-            string supportedExtensions = "*.jpg,*.gif,*.png,*.bmp,*.jpe,*.jpeg,*.tif,*.tiff";
-            foreach (string imageFile in Directory.GetFiles(path).Where(s => supportedExtensions.Contains(Path.GetExtension(s).ToLower())))
+            FileListTable.Items.Clear();
+            var Files = new List<iFixFile>();
+            foreach (string imageFile in Directory.GetFiles(path))
             {
-                FilesListBox.Items.Add(Path.GetFileName(imageFile));
+                Files.Add(new iFixFile(Path.GetFileName(imageFile), Path.GetFileName(imageFile)));
+                //FileListTable.Items.Add(new iFixFile(Path.GetFileName(imageFile), Path.GetFileName(imageFile)));
+                
             }
+            FileListTable.ItemsSource = Files;
         }
 
         private void DefaultPath_Click(object sender, RoutedEventArgs e)
         {
             System.Configuration.Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
             config.AppSettings.Settings["Path"].Value = txtPath.Text;
             config.Save(ConfigurationSaveMode.Modified);
+            MessageBox.Show("Default Path changed successfully.", "Confirmation", MessageBoxButton.OK);
         }
 
-        private void LoadImage(string path)
-        {
-            try
-            {
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri(path);
-                bitmap.EndInit();
-                PreviewImage.Stretch = Stretch.Fill;
-                PreviewImage.Source = bitmap;
-            }
-            catch
-            {
-                BitmapImage bitmap = new BitmapImage();
-                bitmap.BeginInit();
-                bitmap.UriSource = new Uri("pack://application:,,,/Fixit;component/Image/InvalidFile.jpg");
-                bitmap.EndInit();
-                PreviewImage.Stretch = Stretch.Fill;
-                PreviewImage.Source = bitmap;
-            }
-
-        }
     }
 
 }
 
+class iFixFile
+{
+    public string Name { get; set; }
+    public string NewName { get; set; }
+
+    public iFixFile(string name, string newname)
+    {
+        this.Name = name;
+        this.NewName = newname;
+    }
+}
