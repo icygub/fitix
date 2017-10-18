@@ -53,7 +53,7 @@ namespace Fixit {
              * https://stackoverflow.com/questions/163162/can-you-call-directory-getfiles-with-multiple-filters
              * 
              */
-            FileListTable.Items.Clear();
+            //FileListTable.Items.Clear();
             var Files = new List<iFixFile>();
             foreach (string imageFile in Directory.GetFiles(path))
             {
@@ -72,6 +72,15 @@ namespace Fixit {
             MessageBox.Show("Default Path changed successfully.", "Confirmation", MessageBoxButton.OK);
         }
 
+        //private void FileListTable_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+
+        //}
+
+        private void FileListTable_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            //if (e.Column.Header.ToString() == "NewName")
+            //System.Windows.Controls.DataGrid grid = FileListTable;
+            //if(grid.Columns.)
+        }
     }
 
 }
