@@ -27,6 +27,7 @@ namespace Fixit {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
+   
         public MainWindow()
         {
             InitializeComponent();
@@ -68,14 +69,14 @@ namespace Fixit {
             }
             catch
             {
-                FileName.Content = "Files not in the NAME_NUMBER sequence.";
+                FileName.Content = "Files not in the NAME__NUMBER sequence.";
             }
             CreateTable(files);
         }
 
         private void CreateTable(List<IFixFile> fileList)
         {
-            FileListTable.ItemsSource = fileList;
+            FileListTable.ItemsSource = IFixFile.JustLastName(fileList);
             //FileListTable.Columns[0].IsReadOnly = true;
         }
 
@@ -101,4 +102,25 @@ class IFixFile
         this.Name = name;
         this.NewName = newname;
     }
+   public static List<IFixFile> JustLastName(List<IFixFile> FileList)
+ {
+     try
+     {
+         foreach (var File in FileList)
+         {
+             File.Name = (File.Name.Split('_')[2]).Split('.')[0];
+             File.NewName = (File.NewName.Split('_')[2]).Split('.')[0];
+         }
+         return FileList;
+     }
+     catch
+     {
+         foreach (var File in FileList)
+         {
+             File.Name = File.Name.Split('.')[0];
+             File.NewName = File.NewName.Split('.')[0];
+         }
+            return FileList;
+     }
+ }
 }
