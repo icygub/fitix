@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
@@ -53,15 +54,29 @@ namespace Fixit {
              * https://stackoverflow.com/questions/163162/can-you-call-directory-getfiles-with-multiple-filters
              * 
              */
-            FileListTable.Items.Clear();
-            var Files = new List<iFixFile>();
+            var files = new List<IFixFile>();
+            var lastFile = "";
             foreach (string imageFile in Directory.GetFiles(path))
             {
-                Files.Add(new iFixFile(Path.GetFileName(imageFile), Path.GetFileName(imageFile)));
-                //FileListTable.Items.Add(new iFixFile(Path.GetFileName(imageFile), Path.GetFileName(imageFile)));
-                
+                files.Add(new IFixFile(Path.GetFileName(imageFile), Path.GetFileName(imageFile)));
+                lastFile = imageFile;
             }
-            FileListTable.ItemsSource = Files;
+            var displayName = Path.GetFileName(lastFile).Split('_');
+            try
+            {
+                FileName.Content = displayName[0] + "\uff3f" + displayName[1];
+            }
+            catch
+            {
+                FileName.Content = "Files not in the NAME_NUMBER sequence.";
+            }
+            CreateTable(files);
+        }
+
+        private void CreateTable(List<IFixFile> fileList)
+        {
+            FileListTable.ItemsSource = fileList;
+            //FileListTable.Columns[0].IsReadOnly = true;
         }
 
         private void DefaultPath_Click(object sender, RoutedEventArgs e)
@@ -76,12 +91,12 @@ namespace Fixit {
 
 }
 
-class iFixFile
+class IFixFile
 {
     public string Name { get; set; }
     public string NewName { get; set; }
 
-    public iFixFile(string name, string newname)
+    public IFixFile(string name, string newname)
     {
         this.Name = name;
         this.NewName = newname;
