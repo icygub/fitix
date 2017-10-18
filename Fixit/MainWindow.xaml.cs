@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
@@ -26,6 +27,7 @@ namespace Fixit {
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
+   
         public MainWindow()
         {
             InitializeComponent();
@@ -53,15 +55,29 @@ namespace Fixit {
              * https://stackoverflow.com/questions/163162/can-you-call-directory-getfiles-with-multiple-filters
              * 
              */
-            //FileListTable.Items.Clear();
-            var Files = new List<iFixFile>();
+            var files = new List<IFixFile>();
+            var lastFile = "";
             foreach (string imageFile in Directory.GetFiles(path))
             {
-                Files.Add(new iFixFile(Path.GetFileName(imageFile), Path.GetFileName(imageFile)));
-                //FileListTable.Items.Add(new iFixFile(Path.GetFileName(imageFile), Path.GetFileName(imageFile)));
-                
+                files.Add(new IFixFile(Path.GetFileName(imageFile), Path.GetFileName(imageFile)));
+                lastFile = imageFile;
             }
-            FileListTable.ItemsSource = Files;
+            var displayName = Path.GetFileName(lastFile).Split('_');
+            try
+            {
+                FileName.Content = displayName[0] + "\uff3f" + displayName[1];
+            }
+            catch
+            {
+                FileName.Content = "Files not in the NAME__NUMBER sequence.";
+            }
+            CreateTable(files);
+        }
+
+        private void CreateTable(List<IFixFile> fileList)
+        {
+            FileListTable.ItemsSource = IFixFile.JustLastName(fileList);
+            //FileListTable.Columns[0].IsReadOnly = true;
         }
 
         private void DefaultPath_Click(object sender, RoutedEventArgs e)
@@ -72,27 +88,39 @@ namespace Fixit {
             MessageBox.Show("Default Path changed successfully.", "Confirmation", MessageBoxButton.OK);
         }
 
-        //private void FileListTable_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
-        //}
-
-        private void FileListTable_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            //if (e.Column.Header.ToString() == "NewName")
-            //System.Windows.Controls.DataGrid grid = FileListTable;
-            //if(grid.Columns.)
-        }
     }
 
 }
 
-class iFixFile
+class IFixFile
 {
     public string Name { get; set; }
     public string NewName { get; set; }
 
-    public iFixFile(string name, string newname)
+    public IFixFile(string name, string newname)
     {
         this.Name = name;
         this.NewName = newname;
     }
+   public static List<IFixFile> JustLastName(List<IFixFile> FileList)
+ {
+     try
+     {
+         foreach (var File in FileList)
+         {
+             File.Name = (File.Name.Split('_')[2]).Split('.')[0];
+             File.NewName = (File.NewName.Split('_')[2]).Split('.')[0];
+         }
+         return FileList;
+     }
+     catch
+     {
+         foreach (var File in FileList)
+         {
+             File.Name = File.Name.Split('.')[0];
+             File.NewName = File.NewName.Split('.')[0];
+         }
+            return FileList;
+     }
+ }
 }

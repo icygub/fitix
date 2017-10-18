@@ -11,16 +11,13 @@
             <Button x:Name="FixItOpen" Content="Open" HorizontalAlignment="Left" Margin="18,9,0,0" VerticalAlignment="Top" Width="75" Click="btnOpen_Click"/>
             <Label Content="Old Path" HorizontalAlignment="Left" Margin="101,6,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.382,0.406"/>
             <TextBox x:Name="txtPath" HorizontalAlignment="Left" Height="23" Margin="171,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="269" IsReadOnly="True"/>
-            <Label Content="Orinal File Name" HorizontalAlignment="Left" Margin="169,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.382,0.406" Width="112"/>
+            <Label x:Name="FileName" Content="Orinal File Name" HorizontalAlignment="Left" Margin="101,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.382,0.406" Width="339"/>
             <Button x:Name="DefaultPath" Content="Make Default" HorizontalAlignment="Left" Margin="464,12,0,0" VerticalAlignment="Top" Width="75" Click="DefaultPath_Click"/>
             <Button x:Name="OpenNewPath" Content="Open" HorizontalAlignment="Left" Margin="18,51,0,0" VerticalAlignment="Top" Width="75"/>
             <Label Content="New Path" HorizontalAlignment="Left" Margin="101,48,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.382,0.406"/>
             <TextBox x:Name="NewPathText" HorizontalAlignment="Left" Height="23" Margin="169,52,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="269" IsReadOnly="True"/>
-            <DataGrid x:Name="FileListTable" HorizontalAlignment="Left" Height="298" Margin="10,182,0,0" VerticalAlignment="Top" Width="482" IsReadOnly="True" SelectionChanged="FileListTable_SelectionChanged">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Foreground="Black" Width="60" Header="Test Header" IsReadOnly="false" />
-                    <DataGridTextColumn Foreground="Black" Width="60" Header="Test Header" IsReadOnly="true" />
-                </DataGrid.Columns>
+            <DataGrid x:Name="FileListTable" HorizontalAlignment="Left" Height="298" Margin="10,182,0,0" VerticalAlignment="Top" Width="482" >
+                <DataGrid.Columns/>
             </DataGrid>
 
         </Grid>
