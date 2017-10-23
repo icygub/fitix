@@ -11,15 +11,15 @@
             <Button x:Name="FixItOpen" Content="Open" HorizontalAlignment="Left" Margin="18,9,0,0" VerticalAlignment="Top" Width="75" Click="btnOldPath_Click"/>
             <Label Content="Old Path" HorizontalAlignment="Left" Margin="101,6,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.382,0.406"/>
             <TextBox x:Name="txtPath" HorizontalAlignment="Left" Height="23" Margin="171,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="269" IsReadOnly="True"/>
-            <Label x:Name="FileName" Content="Orinal File Name" HorizontalAlignment="Left" Margin="101,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.382,0.406" Width="339"/>
+            <Label x:Name="FileName" Content="Original File Name" HorizontalAlignment="Left" Margin="101,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.382,0.406" Width="339"/>
             <Button x:Name="DefaultPath" Content="Make Default" HorizontalAlignment="Left" Margin="464,12,0,0" VerticalAlignment="Top" Width="75" Click="DefaultPath_Click"/>
             <Button x:Name="OpenNewPath" Content="Open" HorizontalAlignment="Left" Margin="18,51,0,0" VerticalAlignment="Top" Width="75" Click="OpenNewPath_Click"/>
             <Label Content="New Path" HorizontalAlignment="Left" Margin="101,48,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.382,0.406"/>
             <TextBox x:Name="NewPathText" HorizontalAlignment="Left" Height="23" Margin="169,52,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="269" IsReadOnly="True"/>
-            <DataGrid x:Name="FileListTable" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="298" Margin="10,182,0,0" VerticalAlignment="Top" Width="482" >
+            <DataGrid x:Name="FileListTable" HeadersVisibility="Column" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="298" Margin="10,182,0,0" VerticalAlignment="Top" Width="482" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn x:Name="NameColumn" Header="Name" Binding="{Binding Name}" IsReadOnly="True" CanUserReorder="False" CanUserSort="False" />
-                    <DataGridTextColumn x:Name="NewNameColumn" Header="New Name" Binding="{Binding NewName}" CanUserReorder="False" CanUserSort="False" />
+                    <DataGridTextColumn x:Name="NameColumn" Width="240" Header="Name" Binding="{Binding Name}" IsReadOnly="True" CanUserReorder="False" CanUserSort="False" />
+                    <DataGridTextColumn x:Name="NewNameColumn" Width="240" Header="New Name" Binding="{Binding NewName}" CanUserReorder="False" CanUserSort="False" />
                 </DataGrid.Columns>
                 <DataGrid.Resources>
                     <!--This will let you go to the cells that you can edit on tab-->
@@ -32,7 +32,8 @@
                     </Style>
                 </DataGrid.Resources>
             </DataGrid>
-            <Button x:Name="ApplyChanges" Content="Apply Changes" HorizontalAlignment="Left" Margin="564,185,0,0" VerticalAlignment="Top" Width="76" Click="ApplyChanges_Click"/>
+            <Button x:Name="ApplyChanges" Content="Apply Changes" HorizontalAlignment="Left" Margin="564,358,0,0" VerticalAlignment="Top" Width="96" Click="ApplyChanges_Click"/>
+            <Button x:Name="RefreshButton" Content="Refresh" HorizontalAlignment="Left" Margin="564,268,0,0" VerticalAlignment="Top" Width="96" Click="RefreshButton_Click"/>
 
         </Grid>
 

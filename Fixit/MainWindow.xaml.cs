@@ -35,7 +35,6 @@ namespace Fixit
             InitializeComponent();
             LoadFiles(ConfigurationManager.AppSettings["Path"]);
             newPathSet(ConfigurationManager.AppSettings["NewPath"]);
-            //this.ActiveControl = NewNameColumn.cell
         }
 
         private void btnOldPath_Click(object sender, RoutedEventArgs e)
@@ -59,11 +58,11 @@ namespace Fixit
              * https://stackoverflow.com/questions/163162/can-you-call-directory-getfiles-with-multiple-filters
              * 
              */
-            var files = new List<IFixFile>();
+            var files = new List<FixFile>();
             var lastFile = "";
             foreach (string imageFile in Directory.GetFiles(path))
             {
-                files.Add(new IFixFile(Path.GetFileName(imageFile), Path.GetFileName(imageFile), Path.GetFileName(imageFile)));
+                files.Add(new FixFile(Path.GetFileName(imageFile), Path.GetFileName(imageFile), Path.GetFileName(imageFile)));
                 lastFile = imageFile;
             }
             var displayName = Path.GetFileName(lastFile).Split('_');
@@ -73,15 +72,16 @@ namespace Fixit
             }
             catch
             {
-                FileName.Content = "Files not in the NAME__NUMBER sequence.";
+                FileName.Content = "Files not in the NAME_NUMBER sequence.";
             }
             CreateTable(files);
         }
-        List<IFixFile> myListOfFile = new List<IFixFile>();
-        private void CreateTable(List<IFixFile> fileList)
+
+        List<FixFile> myListOfFile = new List<FixFile>();
+        private void CreateTable(List<FixFile> fileList)
         {
            
-            myListOfFile = IFixFile.JustLastName(fileList);
+            myListOfFile = FixFile.JustLastName(fileList);
             FileListTable.ItemsSource = myListOfFile;
             //FileListTable.ItemsSource = IFixFile.JustLastName(fileList);
             //FileListTable.Columns[0].IsReadOnly = true;
@@ -121,42 +121,13 @@ namespace Fixit
         private void ApplyChanges_Click(object sender, RoutedEventArgs e)
         {
             Renamer.RenameFile(txtPath.Text, NewPathText.Text, myListOfFile);
-        }
-    }
-
-    class IFixFile
-    {
-        public string Name { get; set; }
-        public string NewName { get; set; }
-        public string RealName { get; set; }
-
-        public IFixFile(string name, string newname, string realName)
-        {
-            this.Name = name;
-            this.NewName = newname;
-            this.RealName = realName;
+            MessageBox.Show("Files fixed successfully.", "Confirmation", MessageBoxButton.OK);
+            LoadFiles(txtPath.Text);
         }
 
-        public static List<IFixFile> JustLastName(List<IFixFile> FileList)
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                foreach (var File in FileList)
-                {
-                    File.Name = (File.Name.Split('_')[2]).Split('.')[0];
-                    File.NewName = (File.NewName.Split('_')[2]).Split('.')[0];
-                }
-                return FileList;
-            }
-            catch
-            {
-                foreach (var File in FileList)
-                {
-                    File.Name = File.Name.Split('.')[0];
-                    File.NewName = File.NewName.Split('.')[0];
-                }
-                return FileList;
-            }
+            LoadFiles(txtPath.Text);
         }
     }
 }

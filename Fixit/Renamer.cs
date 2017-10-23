@@ -10,7 +10,7 @@ namespace Fixit
     class Renamer
     {
 
-        public static void RenameFile(string OldDirectory, string NewDirectory, List<IFixFile> Files)
+        public static void RenameFile(string OldDirectory, string NewDirectory, List<FixFile> Files)
         {
             foreach (var FileName in Files)
             {
@@ -25,9 +25,12 @@ namespace Fixit
                 myFilename += FileName.NewName;
                 SplitName = FileName.RealName.Split('.');
                 myFilename += "." + SplitName[1];
-                //First lets find out what is the extension.
-                //FileName.RealName.Split('.')[1];
+                if (File.Exists(NewDirectory + "\\" + myFilename))
+                {
+                    File.Delete(NewDirectory + "\\" + myFilename);
+                }
                 File.Copy(OldDirectory + "\\" + FileName.RealName, NewDirectory + "\\" + myFilename);
+                File.Delete(OldDirectory + "\\" + FileName.RealName);
             }
 
         }
