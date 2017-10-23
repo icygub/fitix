@@ -10,11 +10,11 @@ namespace Fixit
     class Renamer
     {
 
-        public void RenameFile(string OldDirectory, string NewDirectory, List<string> CurrentName, List<string> NewName)
+        public static void RenameFile(string OldDirectory, string NewDirectory, List<IFixFile> Files)
         {
-            foreach (var FileName in CurrentName)
+            foreach (var FileName in Files)
             {
-               // File.Copy(OldDirectory + FileName, NewDirectory + NewName[CurrentName.IndexOf(FileName)]);
+             //  File.Copy(OldDirectory + "\\" + FileName.Name, NewDirectory + "\\" + FileName.NewName);
             }
 
         }
