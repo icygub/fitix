@@ -14,7 +14,20 @@ namespace Fixit
         {
             foreach (var FileName in Files)
             {
-             //  File.Copy(OldDirectory + "\\" + FileName.Name, NewDirectory + "\\" + FileName.NewName);
+                var SplitName = FileName.RealName.Split('_');
+                string myFilename = "";
+                for(int i = 0; i < SplitName.Length - 1 ; i++)
+                {
+                    myFilename += SplitName[i];
+
+                    myFilename += "_";
+                }
+                myFilename += FileName.NewName;
+                SplitName = FileName.RealName.Split('.');
+                myFilename += "." + SplitName[1];
+                //First lets find out what is the extension.
+                //FileName.RealName.Split('.')[1];
+                File.Copy(OldDirectory + "\\" + FileName.RealName, NewDirectory + "\\" + myFilename);
             }
 
         }

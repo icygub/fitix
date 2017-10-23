@@ -63,7 +63,7 @@ namespace Fixit
             var lastFile = "";
             foreach (string imageFile in Directory.GetFiles(path))
             {
-                files.Add(new IFixFile(Path.GetFileName(imageFile), Path.GetFileName(imageFile)));
+                files.Add(new IFixFile(Path.GetFileName(imageFile), Path.GetFileName(imageFile), Path.GetFileName(imageFile)));
                 lastFile = imageFile;
             }
             var displayName = Path.GetFileName(lastFile).Split('_');
@@ -121,11 +121,6 @@ namespace Fixit
         private void ApplyChanges_Click(object sender, RoutedEventArgs e)
         {
             Renamer.RenameFile(txtPath.Text, NewPathText.Text, myListOfFile);
-            foreach (var VARIABLE in myListOfFile)
-            {
-                Console.WriteLine(VARIABLE.Name + " " + VARIABLE.NewName);
-            }
-
         }
     }
 
@@ -133,11 +128,13 @@ namespace Fixit
     {
         public string Name { get; set; }
         public string NewName { get; set; }
+        public string RealName { get; set; }
 
-        public IFixFile(string name, string newname)
+        public IFixFile(string name, string newname, string realName)
         {
             this.Name = name;
             this.NewName = newname;
+            this.RealName = realName;
         }
 
         public static List<IFixFile> JustLastName(List<IFixFile> FileList)
