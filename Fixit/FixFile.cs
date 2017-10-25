@@ -9,7 +9,29 @@ namespace Fixit
     class FixFile
     {
         public string Name { get; set; }
-        public string NewName { get; set; }
+        private string _NewName;
+
+        public string NewName
+        {
+            get { return _NewName; }
+            set
+            {
+                _NewName = value;
+                int myCount = 0;
+                if (_NewName.Contains(@"[a-zA-Z]"))
+                {
+                    myCount += 1;
+                }
+                                    myCount += Name.Length;
+                if (NewName.Length < myCount)
+                {
+                    for (int i = 0; NewName.Length < Name.Length; i++)
+                    {
+                        NewName = "0" + NewName;
+                    }
+                }
+            }
+        }
         public string RealName { get; set; }
 
         public FixFile(string name, string newname, string realName)

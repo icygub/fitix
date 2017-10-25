@@ -24,7 +24,10 @@ namespace Fixit
                 }
                 myFilename += FileName.NewName;
                 SplitName = FileName.RealName.Split('.');
-                myFilename += "." + SplitName[1];
+                if (SplitName.Length > 0)
+                {
+                    myFilename += "." + SplitName[1];
+                }
                 if (File.Exists(NewDirectory + "\\" + myFilename))
                 {
                     File.Delete(NewDirectory + "\\" + myFilename);

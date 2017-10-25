@@ -19,7 +19,7 @@
             <DataGrid x:Name="FileListTable" HeadersVisibility="Column" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="298" Margin="10,182,0,0" VerticalAlignment="Top" Width="482" >
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="NameColumn" Width="240" Header="Name" Binding="{Binding Name}" IsReadOnly="True" CanUserReorder="False" CanUserSort="False" />
-                    <DataGridTextColumn x:Name="NewNameColumn" Width="240" Header="New Name" Binding="{Binding NewName}" CanUserReorder="False" CanUserSort="False" />
+                    <DataGridTextColumn x:Name="NewNameColumn" Width="240" Header="New Name" Binding="{Binding NewName, NotifyOnTargetUpdated=True}" CanUserReorder="False" CanUserSort="False" />
                 </DataGrid.Columns>
                 <DataGrid.Resources>
                     <!--This will let you go to the cells that you can edit on tab-->
