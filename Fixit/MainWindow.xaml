@@ -9,23 +9,23 @@
     <Grid>
         <Grid>
             <Button x:Name="FixItOpen" Content="Open" HorizontalAlignment="Left" Margin="18,9,0,0" VerticalAlignment="Top" Width="75" Click="btnOldPath_Click"/>
-            <Label Content="Old Path" HorizontalAlignment="Left" Margin="101,6,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.382,0.406"/>
-            <TextBox x:Name="txtPath" HorizontalAlignment="Left" Height="23" Margin="171,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="269" IsReadOnly="True"/>
+            <Label Content="Fixit Folder" HorizontalAlignment="Left" Margin="101,6,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.382,0.406"/>
+            <TextBox x:Name="txtPath" HorizontalAlignment="Left" Height="23" Margin="182,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="269" IsReadOnly="True"/>
             <Label x:Name="FileName" Content="Original File Name" HorizontalAlignment="Left" Margin="101,134,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.382,0.406" Width="339"/>
-            <Button x:Name="DefaultPath" Content="Make Default" HorizontalAlignment="Left" Margin="464,12,0,0" VerticalAlignment="Top" Width="75" Click="DefaultPath_Click"/>
+            <Button x:Name="DefaultPath" Content="Make Default" HorizontalAlignment="Left" Margin="475,12,0,0" VerticalAlignment="Top" Width="75" Click="DefaultPath_Click"/>
             <Button x:Name="OpenNewPath" Content="Open" HorizontalAlignment="Left" Margin="18,51,0,0" VerticalAlignment="Top" Width="75" Click="OpenNewPath_Click"/>
-            <Label Content="New Path" HorizontalAlignment="Left" Margin="101,48,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.382,0.406"/>
-            <TextBox x:Name="NewPathText" HorizontalAlignment="Left" Height="23" Margin="169,52,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="269" IsReadOnly="True"/>
+            <Label Content="Audit Folder" HorizontalAlignment="Left" Margin="101,48,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.382,0.406"/>
+            <TextBox x:Name="NewPathText" HorizontalAlignment="Left" Height="23" Margin="180,52,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="269" IsReadOnly="True"/>
             <DataGrid x:Name="FileListTable" HeadersVisibility="Column" AutoGenerateColumns="False" HorizontalAlignment="Left" Height="298" Margin="10,182,0,0" VerticalAlignment="Top" Width="482" >
                 <DataGrid.Columns>
                     <DataGridTextColumn x:Name="NameColumn" Width="240" Header="Name" Binding="{Binding Name}" IsReadOnly="True" CanUserReorder="False" CanUserSort="False" />
-                    <DataGridTextColumn x:Name="NewNameColumn" Width="240" Header="New Name" Binding="{Binding NewName, NotifyOnTargetUpdated=True}" CanUserReorder="False" CanUserSort="False" />
+                    <DataGridTextColumn x:Name="NewNameColumn" Width="240" Header="New Name" Binding="{Binding NewName, NotifyOnTargetUpdated=True}" CanUserReorder="False" CanUserSort="False"/>
                 </DataGrid.Columns>
                 <DataGrid.Resources>
                     <!--This will let you go to the cells that you can edit on tab-->
                     <Style TargetType="DataGridCell">
                         <Style.Triggers>
-                                <Trigger Property="IsReadOnly" Value="True">
+                            <Trigger Property="IsReadOnly" Value="True">
                                 <Setter Property="IsTabStop" Value="False"/>
                             </Trigger>
                         </Style.Triggers>

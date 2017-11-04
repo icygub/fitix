@@ -83,8 +83,6 @@ namespace Fixit
            
             myListOfFile = FixFile.JustLastName(fileList);
             FileListTable.ItemsSource = myListOfFile;
-            //FileListTable.ItemsSource = IFixFile.JustLastName(fileList);
-            //FileListTable.Columns[0].IsReadOnly = true;
         }
 
         private void DefaultPath_Click(object sender, RoutedEventArgs e)

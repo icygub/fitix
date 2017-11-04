@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Fixit
@@ -18,14 +19,14 @@ namespace Fixit
             {
                 _NewName = value;
                 int myCount = 0;
-                if (_NewName.Contains(@"[a-zA-Z]"))
+                foreach (Match m in Regex.Matches(_NewName, @"[a-zA-Z]"))
                 {
-                    myCount += 1;
+                    myCount += m.Length;
                 }
-                                    myCount += Name.Length;
+                myCount += Name.Length;
                 if (NewName.Length < myCount)
                 {
-                    for (int i = 0; NewName.Length < Name.Length; i++)
+                    for (int i = 0; NewName.Length < myCount; i++)
                     {
                         NewName = "0" + NewName;
                     }
